@@ -1,0 +1,189 @@
+{
+  "profile": {
+    "fullName": "Omar Nagy",
+    "formattedName": "OMAR NAGY",
+    "shortName": "Omar Nagy",
+    "headline": "Senior Frontend Engineer & AI Resume Specialist",
+    "location": "Cairo, Egypt (Remote)",
+    "email": "hello@omargnagy.com",
+    "phone": "",
+    "phoneLink": "",
+    "image": "assets/pictures/profile.png",
+    "summary": "Senior front-end engineer building accessible, data-driven hiring experiences with a focus on AI-assisted tooling and polished user interfaces.",
+    "download": {
+      "light": "assets/pdf/myResumeCV-light.pdf",
+      "dark": "assets/pdf/myResumeCV-dark.pdf"
+    }
+  },
+  "contact": [
+    {
+      "icon": "fa-solid fa-location-dot",
+      "label": "Cairo, Egypt (Remote)"
+    },
+    {
+      "icon": "fa-solid fa-envelope",
+      "label": "hello@omargnagy.com",
+      "href": "mailto:hello@omargnagy.com"
+    },
+    {
+      "icon": "fa-solid fa-globe",
+      "label": "omargnagy.com",
+      "href": "https://omargnagy.com"
+    }
+  ],
+  "social": [
+    {
+      "icon": "fa-brands fa-github",
+      "label": "@omarnagy91",
+      "href": "https://github.com/omarnagy91"
+    },
+    {
+      "icon": "fa-solid fa-globe",
+      "label": "omargnagy.com",
+      "href": "https://omargnagy.com"
+    }
+  ],
+  "skills": [
+    {
+      "name": "JavaScript",
+      "level": 90,
+      "keywords": [
+        "TypeScript",
+        "ES2023",
+        "Node.js"
+      ]
+    },
+    {
+      "name": "React",
+      "level": 88,
+      "keywords": [
+        "Hooks",
+        "Next.js",
+        "SSR"
+      ]
+    },
+    {
+      "name": "CSS",
+      "level": 92,
+      "keywords": [
+        "Design systems",
+        "CSS Grid",
+        "Animations"
+      ]
+    },
+    {
+      "name": "Testing",
+      "level": 80,
+      "keywords": [
+        "Playwright",
+        "Jest",
+        "Testing Library"
+      ]
+    },
+    {
+      "name": "AI Tooling",
+      "level": 75,
+      "keywords": [
+        "OpenAI APIs",
+        "Prompt design",
+        "AI governance"
+      ]
+    }
+  ],
+  "languages": [
+    {
+      "name": "Arabic",
+      "level": "Native",
+      "rating": 5
+    },
+    {
+      "name": "English",
+      "level": "Fluent",
+      "rating": 5
+    },
+    {
+      "name": "German",
+      "level": "Conversational",
+      "rating": 3
+    }
+  ],
+  "experience": [
+    {
+      "title": "Founder & Maintainer",
+      "company": "ResumeForge AI (Open Source)",
+      "employmentType": "Independent",
+      "location": "Remote",
+      "start": "Jan 2024",
+      "end": "Present",
+      "summary": "Designs and delivers ResumeForge AI, an open-source resume personalization platform used by job seekers and talent teams.",
+      "highlights": [
+        "Built a data-driven rendering engine that keeps UI, AI prompts, and PDF exports in sync.",
+        "Shipped GPT-5 tailoring with guardrails for ATS readability and JSON schema safety."
+      ]
+    },
+    {
+      "title": "Lead Frontend Engineer",
+      "company": "Product Studio Clients",
+      "employmentType": "Consulting",
+      "location": "Remote",
+      "start": "May 2020",
+      "end": "Dec 2023",
+      "summary": "Partnered with startups to ship conversion-focused web apps and design systems across SaaS and e-commerce products.",
+      "highlights": [
+        "Optimized critical funnels with A/B-tested UI experiments that lifted activation by up to 22%.",
+        "Mentored cross-functional teams on accessibility-first workflows and automated testing."
+      ]
+    }
+  ],
+  "certificates": [
+    {
+      "year": "2023",
+      "title": "Certified Web Accessibility Specialist",
+      "honours": ""
+    },
+    {
+      "year": "2021",
+      "title": "Google Cloud Professional Developer",
+      "honours": "with distinction"
+    },
+    {
+      "year": "2018",
+      "title": "AWS Solutions Architect Associate",
+      "honours": ""
+    }
+  ],
+  "education": [
+    {
+      "title": "B.Sc. Computer Engineering",
+      "institution": "Cairo University",
+      "years": "2011 - 2015"
+    },
+    {
+      "title": "Diploma in Product Design Leadership",
+      "institution": "Berlin Tech Institute",
+      "years": "2018 - 2019"
+    }
+  ],
+  "interests": [
+    {
+      "icon": "fa-solid fa-code",
+      "label": "Open source"
+    },
+    {
+      "icon": "fa-solid fa-robot",
+      "label": "AI ethics"
+    },
+    {
+      "icon": "fa-solid fa-book",
+      "label": "Product strategy"
+    },
+    {
+      "icon": "fa-solid fa-plane",
+      "label": "Travel"
+    },
+    {
+      "icon": "fa-solid fa-microphone",
+      "label": "Tech speaking"
+    }
+  ]
+}

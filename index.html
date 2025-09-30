@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Permissions-Policy" content="interest-cohort=()">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Omar Nagy">
+
+    <title>ResumeForge AI</title>
+
+    <script src="https://kit.fontawesome.com/cb81440751.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="assets/stylesheets/style.css" type="text/css">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/pictures/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/pictures/favicon/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/pictures/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="assets/pictures/favicon/android-chrome-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="assets/pictures/favicon/android-chrome-512x512.png">
+</head>
+<body>
+    <header class="l-header" id="header">
+        <nav class="nav bd-container">
+            <a href="#" class="nav_logo" id="nav-logo">ResumeForge AI</a>
+            <div class="nav_menu" id="nav-menu">
+                <ul class="nav_list">
+                    <li class="nav_item">
+                        <a href="#job-tailor" class="nav_link">
+                            <i class="fa-solid fa-wand-magic-sparkles nav_icon"></i>Tailor
+                        </a>
+                    </li>
+                    <li class="nav_item">
+                        <a href="#home" class="nav_link active-link">
+                            <i class="fa-solid fa-house nav_icon"></i>Home
+                        </a>
+                    </li>
+                    <li class="nav_item">
+                        <a href="#profile" class="nav_link">
+                            <i class="fa-solid fa-user nav_icon"></i>Profile
+                        </a>
+                    </li>
+                    <li class="nav_item">
+                        <a href="#skills" class="nav_link">
+                            <i class="fa-solid fa-computer nav_icon"></i>Skills
+                        </a>
+                    </li>
+                    <li class="nav_item">
+                        <a href="#languages" class="nav_link">
+                            <i class="fa-solid fa-comments nav_icon"></i>Languages
+                        </a>
+                    </li>
+                    <li class="nav_item">
+                        <a href="#experience" class="nav_link">
+                            <i class="fa-solid fa-briefcase nav_icon"></i>Experience
+                        </a>
+                    </li>
+                    <li class="nav_item">
+                        <a href="#certificates" class="nav_link">
+                            <i class="fa-solid fa-graduation-cap nav_icon"></i>Certificates
+                        </a>
+                    </li>
+                    <li class="nav_item">
+                        <a href="#education" class="nav_link">
+                            <i class="fa-solid fa-book-bookmark nav_icon"></i>Education
+                        </a>
+                    </li>
+                    <li class="nav_item">
+                        <a href="#interests" class="nav_link">
+                            <i class="fa-solid fa-icons nav_icon"></i>Interests
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="nav_toggle" id="nav-toggle">
+                <i class="fa-solid fa-bars"></i>
+            </div>
+        </nav>
+    </header>
+
+    <main class="l-main bd-container">
+        <section class="customizer section" id="job-tailor">
+            <h2 class="section-title">AI Tailor</h2>
+            <div class="customizer_content">
+                <p class="customizer_help">Paste a job description and let ResumeForge AI tailor your resume for the role.</p>
+                <div class="customizer_field">
+                    <label for="api-key-input">OpenAI API Key</label>
+                    <input type="password" id="api-key-input" autocomplete="off" placeholder="sk-...">
+                    <small class="customizer_hint">The key is stored in localStorage for your device only. Use a secure proxy in production.</small>
+                </div>
+                <div class="customizer_field">
+                    <label for="job-details-input">Job Description or Recruiter Notes</label>
+                    <textarea id="job-details-input" rows="8" placeholder="Paste the job description, company notes, or recruiter instructions here."></textarea>
+                </div>
+                <div class="customizer_actions">
+                    <button type="button" id="customize-button" class="button-primary">Generate Tailored Resume</button>
+                    <button type="button" id="reset-button" class="button-outline">Reset to Base Profile</button>
+                </div>
+                <p class="customizer_status" id="customizer-status" aria-live="polite"></p>
+            </div>
+        </section>
+
+        <div class="resume" id="area-cv">
+            <div class="resume_left">
+                <section class="home" id="home">
+                    <div class="home_container section bd-grid">
+                        <div class="home_data bd-grid">
+                            <img alt="Profile picture" class="home_img" id="home-img">
+                            <h1 class="home_title" id="home-name"></h1>
+                            <h3 class="home_profession" id="home-headline"></h3>
+                            <div>
+                                <a download id="download-button" class="home_button-movil">Download</a>
+                            </div>
+                        </div>
+                        <div class="home_address bd-grid" data-collection="contacts"></div>
+                    </div>
+
+                    <i class="fa-solid fa-moon change-theme" title="Theme" id="theme-button"></i>
+                    <i class="fa-solid fa-download generate-pdf" title="Generate PDF" id="resume-button"></i>
+                </section>
+
+                <section class="social section">
+                    <h2 class="section-title">Social</h2>
+                    <div class="social_container bd-grid" data-collection="social"></div>
+                </section>
+
+                <section class="profile section" id="profile">
+                    <h2 class="section-title">Profile</h2>
+                    <p class="profile_description" id="profile-summary"></p>
+                </section>
+
+                <section class="skills section" id="skills">
+                    <h2 class="section-title">Skills</h2>
+                    <div class="skills_container">
+                        <div class="skills_content bd-grid" data-collection="skills"></div>
+                    </div>
+                </section>
+
+                <section class="languages section" id="languages">
+                    <h2 class="section-title">Languages</h2>
+                    <div class="languages_container" data-collection="languages"></div>
+                </section>
+            </div>
+
+            <div class="resume_right">
+                <section class="experience section" id="experience">
+                    <h2 class="section-title">Experience</h2>
+                    <div class="experience_container bd-grid" data-collection="experience"></div>
+                </section>
+
+                <section class="certificate section" id="certificates">
+                    <h2 class="section-title">Certificates</h2>
+                    <div class="certificate_container bd-grid" data-collection="certificates"></div>
+                </section>
+
+                <section class="education section" id="education">
+                    <h2 class="section-title">Education</h2>
+                    <div class="education_container bd-grid" data-collection="education"></div>
+                </section>
+
+                <section class="interests section" id="interests">
+                    <h2 class="section-title">Interests</h2>
+                    <div class="interests_container bd-grid" data-collection="interests"></div>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <a href="#" class="scrolltop" id="scroll-top">
+        <i class="fa-solid fa-arrow-up scrolltop_icon"></i>
+    </a>
+
+    <script src="assets/javascripts/html2pdf.v0.9.3.bundle.min.js"></script>
+    <script src="assets/javascripts/main.js"></script>
+</body>
+</html>
+
+
