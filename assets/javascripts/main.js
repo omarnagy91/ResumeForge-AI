@@ -597,7 +597,7 @@
             input: buildTailorPrompt(jobDetails),
             reasoning: { effort: 'high' },
             text: { verbosity: 'medium' },
-            max_output_tokens: 1800
+            max_output_tokens: 8000
         };
 
         const response = await fetch(OPENAI_ENDPOINT, {
@@ -736,12 +736,21 @@
         const path = isDarkMode() ? downloadConfig.dark : downloadConfig.light;
         const filename = getFileName(path) || (isDarkMode() ? 'myResumeCV-dark.pdf' : 'myResumeCV-light.pdf');
 
+        // Get the actual height of the content
+        const element = selectors.areaCv;
+        const elementHeight = element.scrollHeight;
+        const elementWidth = element.scrollWidth;
+        
+        // Calculate dimensions in mm (A4 width is 210mm)
+        const pageWidth = 210;
+        const pageHeight = (elementHeight * pageWidth) / elementWidth;
+
         const options = {
             margin: 0,
             filename,
             image: { type: 'jpeg', quality: 0.98 },
             html2canvas: { scale: 4, useCORS: true },
-            jsPDF: { format: 'a4', orientation: 'portrait' }
+            jsPDF: { unit: 'mm', format: [pageWidth, pageHeight], orientation: 'portrait' }
         };
 
         html2pdf(selectors.areaCv, options);
