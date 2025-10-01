@@ -16,8 +16,15 @@ export function initPdfDownload(elements, themeController, getDownloadConfig) {
         resumeButton.addEventListener('click', () => {
             addScaleCv();
             const config = normalizeDownloadConfig(getDownloadConfig());
-            generateResume(areaCv, themeController.isDarkMode(), config);
-            setTimeout(removeScaleCv, 1000);
+            const isDark = themeController.isDarkMode();
+
+            Promise.resolve(generateResume(areaCv, isDark, config))
+                .catch((error) => {
+                    console.error('PDF export failed:', error);
+                })
+                .finally(() => {
+                    removeScaleCv();
+                });
         });
     }
 }
@@ -31,26 +38,43 @@ function normalizeDownloadConfig(config) {
 
 function generateResume(area, isDarkMode, config) {
     if (typeof html2pdf === 'undefined') {
-        return;
+        return Promise.reject(new Error('html2pdf is not available.'));
+    }
+
+    if (!area) {
+        return Promise.reject(new Error('Resume element is not available.'));
     }
 
     const target = isDarkMode ? config.dark : config.light;
     const filename = getFileName(target) || (isDarkMode ? 'myResumeCV-dark.pdf' : 'myResumeCV-light.pdf');
 
-    const elementHeight = area.scrollHeight;
-    const elementWidth = area.scrollWidth;
+    const rect = area.getBoundingClientRect();
+    const measuredWidth = Math.ceil(Math.max(rect.width, area.scrollWidth, area.offsetWidth, 1));
+    const measuredHeight = Math.ceil(Math.max(rect.height, area.scrollHeight, area.offsetHeight, 1));
     const pageWidth = 210;
-    const pageHeight = elementWidth === 0 ? 297 : (elementHeight * pageWidth) / elementWidth;
+    const ratio = measuredHeight / measuredWidth;
+    const pageHeight = ratio > 0 ? Math.max(pageWidth * ratio, 297) : 297;
+
+    const windowWidth = Math.max(document.documentElement.clientWidth, measuredWidth);
+    const windowHeight = Math.max(document.documentElement.clientHeight, measuredHeight);
 
     const options = {
         margin: 0,
         filename,
         image: { type: 'jpeg', quality: 0.98 },
-        html2canvas: { scale: 4, useCORS: true },
-        jsPDF: { unit: 'mm', format: [pageWidth, pageHeight], orientation: 'portrait' }
+        html2canvas: {
+            scale: 4,
+            useCORS: true,
+            width: measuredWidth,
+            height: measuredHeight,
+            windowWidth,
+            windowHeight
+        },
+        jsPDF: { unit: 'mm', format: [pageWidth, pageHeight], orientation: 'portrait' },
+        pagebreak: { mode: ['css', 'legacy'] }
     };
 
-    html2pdf(area, options);
+    return html2pdf().set(options).from(area).save();
 }
 
 function addScaleCv() {
