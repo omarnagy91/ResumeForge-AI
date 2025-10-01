@@ -1,5 +1,4 @@
 import { DEFAULT_IMAGE, DOWNLOAD_FALLBACKS } from './constants.js';
-import { resolveImageSource } from './imageCache.js';
 import { clampNumber, deepClone, formatDateRange, isPlainObject } from './utils.js';
 
 export function createResumeRenderer(selectors, collections, state) {
@@ -375,52 +374,20 @@ function renderTechnologyItem(item) {
     }
 
     const data = typeof item === 'string' ? { name: item } : item;
-    if (!data || (!data.name && !data.icon)) {
+    if (!data || !data.name) {
         return null;
     }
 
     const wrapper = document.createElement('div');
     wrapper.className = 'technologies_item';
 
-    if (data.icon) {
-        const iconUrl = data.icon;
-        const icon = document.createElement('img');
-        icon.className = 'technologies_icon';
-        icon.alt = `${data.name || 'Technology'} logo`;
-        icon.loading = 'lazy';
-        icon.dataset.originalSrc = iconUrl;
-
-        if (typeof iconUrl === 'string' && !iconUrl.startsWith('data:')) {
-            icon.crossOrigin = 'anonymous';
-        }
-
-        icon.dataset.inlinePending = 'true';
-        icon.src = iconUrl;
-        wrapper.appendChild(icon);
-
-        const inlinePromise = resolveImageSource(iconUrl)
-            .then((inlineSrc) => {
-                if (!inlineSrc) {
-                    return;
-                }
-                if (icon.dataset.originalSrc !== iconUrl) {
-                    return;
-                }
-                if (inlineSrc !== iconUrl) {
-                    icon.src = inlineSrc;
-                    icon.removeAttribute('crossorigin');
-                }
-            })
-            .catch(() => {})
-            .finally(() => {
-                icon.dataset.inlinePending = 'false';
-                delete icon.__inlinePromise;
-            });
-
-        icon.__inlinePromise = inlinePromise;
-
-        icon.__inlinePromise = inlinePromise;
-    }
+    // Use Font Awesome icon instead of image - this works perfectly in PDFs!
+    const iconClass = getTechnologyIconClass(data.name);
+    const icon = document.createElement('i');
+    icon.className = iconClass;
+    icon.style.fontSize = '28px';
+    icon.style.color = 'var(--text-color)';
+    wrapper.appendChild(icon);
 
     const label = document.createElement('span');
     label.className = 'technologies_name';
@@ -428,6 +395,60 @@ function renderTechnologyItem(item) {
     wrapper.appendChild(label);
 
     return wrapper;
+}
+
+// Map technology names to Font Awesome icon classes
+function getTechnologyIconClass(techName) {
+    const iconMap = {
+        'python': 'fa-brands fa-python',
+        'fastapi': 'fa-solid fa-bolt',
+        'aws': 'fa-brands fa-aws',
+        'typescript': 'fa-solid fa-code',
+        'node.js': 'fa-brands fa-node-js',
+        'nodejs': 'fa-brands fa-node-js',
+        'react': 'fa-brands fa-react',
+        'docker': 'fa-brands fa-docker',
+        'postgresql': 'fa-solid fa-database',
+        'mongodb': 'fa-solid fa-database',
+        'git': 'fa-brands fa-git-alt',
+        'wordpress': 'fa-brands fa-wordpress',
+        'firebase': 'fa-solid fa-fire',
+        'javascript': 'fa-brands fa-js',
+        'html': 'fa-brands fa-html5',
+        'html5': 'fa-brands fa-html5',
+        'css': 'fa-brands fa-css3-alt',
+        'css3': 'fa-brands fa-css3-alt',
+        'php': 'fa-brands fa-php',
+        'java': 'fa-brands fa-java',
+        'angular': 'fa-brands fa-angular',
+        'vue': 'fa-brands fa-vuejs',
+        'vue.js': 'fa-brands fa-vuejs',
+        'sass': 'fa-brands fa-sass',
+        'less': 'fa-brands fa-less',
+        'bootstrap': 'fa-brands fa-bootstrap',
+        'laravel': 'fa-brands fa-laravel',
+        'symfony': 'fa-brands fa-symfony',
+        'npm': 'fa-brands fa-npm',
+        'yarn': 'fa-brands fa-yarn',
+        'github': 'fa-brands fa-github',
+        'gitlab': 'fa-brands fa-gitlab',
+        'bitbucket': 'fa-brands fa-bitbucket',
+        'linux': 'fa-brands fa-linux',
+        'ubuntu': 'fa-brands fa-ubuntu',
+        'windows': 'fa-brands fa-windows',
+        'apple': 'fa-brands fa-apple',
+        'android': 'fa-brands fa-android',
+        'shopify': 'fa-brands fa-shopify',
+        'stripe': 'fa-brands fa-stripe',
+        'jenkins': 'fa-brands fa-jenkins',
+        'slack': 'fa-brands fa-slack',
+        'trello': 'fa-brands fa-trello',
+        'figma': 'fa-brands fa-figma',
+        'sketch': 'fa-brands fa-sketch',
+    };
+
+    const normalized = techName.toLowerCase().trim();
+    return iconMap[normalized] || 'fa-solid fa-code'; // Default to code icon
 }
 
 function renderInterestItem(item) {

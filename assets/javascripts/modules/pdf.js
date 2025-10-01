@@ -65,16 +65,27 @@ function generateResume(area, isDarkMode, config) {
         html2canvas: {
             scale: 4,
             useCORS: true,
+            allowTaint: false,
             width: measuredWidth,
             height: measuredHeight,
             windowWidth,
-            windowHeight
+            windowHeight,
+            logging: false
         },
         jsPDF: { unit: 'mm', format: [pageWidth, pageHeight], orientation: 'portrait' },
         pagebreak: { mode: ['css', 'legacy'] }
     };
 
-    return waitForInlineImages(area).then(() => html2pdf().set(options).from(area).save());
+    // With Font Awesome icons, we don't need any image conversion! Just generate the PDF directly.
+    console.log('📄 Generating PDF with Font Awesome icons...');
+    return html2pdf().set(options).from(area).save()
+        .then(() => {
+            console.log('✅ PDF generated successfully!');
+        })
+        .catch((error) => {
+            console.error('❌ PDF generation failed:', error);
+            throw error;
+        });
 }
 
 function addScaleCv() {
@@ -83,17 +94,4 @@ function addScaleCv() {
 
 function removeScaleCv() {
     document.body.classList.remove('scale-cv');
-}
-
-
-function waitForInlineImages(root) {
-    const pending = Array.from(root.querySelectorAll('img[data-inline-pending="true"]'))
-        .map((image) => image.__inlinePromise)
-        .filter((promise) => promise && typeof promise.then === 'function');
-
-    if (!pending.length) {
-        return Promise.resolve();
-    }
-
-    return Promise.allSettled(pending).then(() => undefined);
 }

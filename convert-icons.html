@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Icon Converter - Convert CDN Icons to Data URIs</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 900px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+        .description {
+            color: #666;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+        button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-right: 10px;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+        #status {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 5px;
+            display: none;
+        }
+        #status.loading {
+            display: block;
+            background: #e7f3ff;
+            border: 1px solid #b3d9ff;
+            color: #004085;
+        }
+        #status.success {
+            display: block;
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+        }
+        #status.error {
+            display: block;
+            background: #f8d7da;
+            border: 1px solid #f5c6cb;
+            color: #721c24;
+        }
+        #output {
+            margin-top: 20px;
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            max-height: 400px;
+            overflow-y: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            white-space: pre-wrap;
+            word-break: break-all;
+            display: none;
+        }
+        .icon-preview {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .icon-item {
+            text-align: center;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 5px;
+        }
+        .icon-item img {
+            width: 40px;
+            height: 40px;
+            margin-bottom: 5px;
+        }
+        .icon-item span {
+            display: block;
+            font-size: 11px;
+            color: #666;
+        }
+        .progress {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎨 Technology Icons Converter</h1>
+        <p class="description">
+            This tool will download all technology icons from your candidate.json file and convert them to 
+            embedded data URIs. This solves CORS issues and ensures icons appear in PDF exports.
+        </p>
+        
+        <div>
+            <button id="convertBtn" onclick="convertIcons()">Convert Icons to Data URIs</button>
+            <button id="copyBtn" onclick="copyOutput()" style="display:none;">Copy JSON to Clipboard</button>
+        </div>
+        
+        <div id="status"></div>
+        <div id="preview" class="icon-preview"></div>
+        <div id="output"></div>
+    </div>
+
+    <script>
+        let convertedData = null;
+
+        async function convertIcons() {
+            const btn = document.getElementById('convertBtn');
+            const status = document.getElementById('status');
+            const output = document.getElementById('output');
+            const copyBtn = document.getElementById('copyBtn');
+            const preview = document.getElementById('preview');
+            
+            btn.disabled = true;
+            status.className = 'loading';
+            status.style.display = 'block';
+            status.innerHTML = 'Loading candidate.json...';
+            output.style.display = 'none';
+            copyBtn.style.display = 'none';
+            preview.innerHTML = '';
+
+            try {
+                // Load the candidate.json file
+                const response = await fetch('assets/data/candidate.json');
+                if (!response.ok) {
+                    throw new Error('Failed to load candidate.json');
+                }
+                
+                const data = await response.json();
+                
+                if (!data.technologies || !Array.isArray(data.technologies)) {
+                    throw new Error('No technologies array found in candidate.json');
+                }
+
+                status.innerHTML = `Converting ${data.technologies.length} technology icons...<div class="progress" id="progress"></div>`;
+                
+                const progressDiv = document.getElementById('progress');
+                let completed = 0;
+                
+                // Convert each icon
+                const convertedTechnologies = await Promise.all(
+                    data.technologies.map(async (tech, index) => {
+                        if (!tech.icon || tech.icon.startsWith('data:')) {
+                            completed++;
+                            progressDiv.textContent = `Progress: ${completed}/${data.technologies.length}`;
+                            return tech;
+                        }
+
+                        try {
+                            const dataUri = await convertImageToDataUri(tech.icon);
+                            
+                            // Add preview
+                            const previewItem = document.createElement('div');
+                            previewItem.className = 'icon-item';
+                            previewItem.innerHTML = `
+                                <img src="${dataUri}" alt="${tech.name}">
+                                <span>${tech.name}</span>
+                            `;
+                            preview.appendChild(previewItem);
+                            
+                            completed++;
+                            progressDiv.textContent = `Progress: ${completed}/${data.technologies.length}`;
+                            
+                            return {
+                                ...tech,
+                                icon: dataUri
+                            };
+                        } catch (error) {
+                            console.error(`Failed to convert ${tech.name}:`, error);
+                            completed++;
+                            progressDiv.textContent = `Progress: ${completed}/${data.technologies.length} (1 failed)`;
+                            return tech; // Keep original if conversion fails
+                        }
+                    })
+                );
+
+                // Update the data
+                data.technologies = convertedTechnologies;
+                convertedData = data;
+
+                // Show output
+                output.textContent = JSON.stringify(data, null, 2);
+                output.style.display = 'block';
+                copyBtn.style.display = 'inline-block';
+
+                status.className = 'success';
+                status.innerHTML = `✅ Successfully converted ${completed} icons! Copy the JSON below and replace the content of assets/data/candidate.json`;
+
+            } catch (error) {
+                status.className = 'error';
+                status.innerHTML = `❌ Error: ${error.message}`;
+                console.error(error);
+            } finally {
+                btn.disabled = false;
+            }
+        }
+
+        async function convertImageToDataUri(url) {
+            return new Promise((resolve, reject) => {
+                const img = new Image();
+                img.crossOrigin = 'anonymous';
+                
+                const timeout = setTimeout(() => {
+                    reject(new Error('Timeout loading image'));
+                }, 10000);
+
+                img.onload = () => {
+                    clearTimeout(timeout);
+                    try {
+                        const canvas = document.createElement('canvas');
+                        canvas.width = img.naturalWidth || img.width || 100;
+                        canvas.height = img.naturalHeight || img.height || 100;
+                        
+                        const ctx = canvas.getContext('2d');
+                        ctx.drawImage(img, 0, 0);
+                        
+                        const dataUri = canvas.toDataURL('image/png');
+                        resolve(dataUri);
+                    } catch (err) {
+                        reject(err);
+                    }
+                };
+
+                img.onerror = () => {
+                    clearTimeout(timeout);
+                    // Try with CORS proxy
+                    const proxyUrl = `https://corsproxy.io/?${encodeURIComponent(url)}`;
+                    fetch(proxyUrl)
+                        .then(res => res.blob())
+                        .then(blob => {
+                            const reader = new FileReader();
+                            reader.onloadend = () => resolve(reader.result);
+                            reader.onerror = () => reject(new Error('Failed to convert blob'));
+                            reader.readAsDataURL(blob);
+                        })
+                        .catch(reject);
+                };
+
+                img.src = url;
+            });
+        }
+
+        function copyOutput() {
+            const output = document.getElementById('output');
+            const textArea = document.createElement('textarea');
+            textArea.value = output.textContent;
+            document.body.appendChild(textArea);
+            textArea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textArea);
+            
+            const copyBtn = document.getElementById('copyBtn');
+            const originalText = copyBtn.textContent;
+            copyBtn.textContent = '✓ Copied!';
+            setTimeout(() => {
+                copyBtn.textContent = originalText;
+            }, 2000);
+        }
+    </script>
+</body>
+</html>
