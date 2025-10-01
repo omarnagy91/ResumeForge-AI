@@ -1,4 +1,5 @@
 import { DEFAULT_IMAGE, DOWNLOAD_FALLBACKS } from './constants.js';
+import { resolveImageSource } from './imageCache.js';
 import { clampNumber, deepClone, formatDateRange, isPlainObject } from './utils.js';
 
 export function createResumeRenderer(selectors, collections, state) {
@@ -382,12 +383,43 @@ function renderTechnologyItem(item) {
     wrapper.className = 'technologies_item';
 
     if (data.icon) {
+        const iconUrl = data.icon;
         const icon = document.createElement('img');
         icon.className = 'technologies_icon';
-        icon.src = data.icon;
         icon.alt = `${data.name || 'Technology'} logo`;
         icon.loading = 'lazy';
+        icon.dataset.originalSrc = iconUrl;
+
+        if (typeof iconUrl === 'string' && !iconUrl.startsWith('data:')) {
+            icon.crossOrigin = 'anonymous';
+        }
+
+        icon.dataset.inlinePending = 'true';
+        icon.src = iconUrl;
         wrapper.appendChild(icon);
+
+        const inlinePromise = resolveImageSource(iconUrl)
+            .then((inlineSrc) => {
+                if (!inlineSrc) {
+                    return;
+                }
+                if (icon.dataset.originalSrc !== iconUrl) {
+                    return;
+                }
+                if (inlineSrc !== iconUrl) {
+                    icon.src = inlineSrc;
+                    icon.removeAttribute('crossorigin');
+                }
+            })
+            .catch(() => {})
+            .finally(() => {
+                icon.dataset.inlinePending = 'false';
+                delete icon.__inlinePromise;
+            });
+
+        icon.__inlinePromise = inlinePromise;
+
+        icon.__inlinePromise = inlinePromise;
     }
 
     const label = document.createElement('span');

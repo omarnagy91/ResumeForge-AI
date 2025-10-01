@@ -74,7 +74,7 @@ function generateResume(area, isDarkMode, config) {
         pagebreak: { mode: ['css', 'legacy'] }
     };
 
-    return html2pdf().set(options).from(area).save();
+    return waitForInlineImages(area).then(() => html2pdf().set(options).from(area).save());
 }
 
 function addScaleCv() {
@@ -83,4 +83,17 @@ function addScaleCv() {
 
 function removeScaleCv() {
     document.body.classList.remove('scale-cv');
+}
+
+
+function waitForInlineImages(root) {
+    const pending = Array.from(root.querySelectorAll('img[data-inline-pending="true"]'))
+        .map((image) => image.__inlinePromise)
+        .filter((promise) => promise && typeof promise.then === 'function');
+
+    if (!pending.length) {
+        return Promise.resolve();
+    }
+
+    return Promise.allSettled(pending).then(() => undefined);
 }
