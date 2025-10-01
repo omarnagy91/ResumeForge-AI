@@ -1,4 +1,4 @@
-(() => {
+﻿(() => {
     'use strict';
 
     const OPENAI_ENDPOINT = 'https://api.openai.com/v1/responses';
@@ -631,8 +631,8 @@
             model: OPENAI_MODEL,
             input: buildTailorPrompt(jobDetails),
             reasoning: { effort: 'high' },
-            text: { verbosity: 'medium' },
-            max_output_tokens: 12000
+            text: { verbosity: 'high' },
+            max_output_tokens: 20000
         };
 
         const response = await fetch(OPENAI_ENDPOINT, {
@@ -674,23 +674,155 @@
         return extractJson(content);
     }
 
+    // Enhanced buildTailorPrompt function with comprehensive AI instructions
+    // Replace the existing buildTailorPrompt function in main.js with this version
+
     function buildTailorPrompt(jobDetails) {
         const baseResume = JSON.stringify(state.current || state.base || {}, null, 2);
         return [
-            'Job description:',
+            '=== JOB DESCRIPTION ===',
             jobDetails,
             '',
-            'Base resume JSON:',
+            '=== BASE RESUME (JSON) ===',
             baseResume,
             '',
-            'CRITICAL INSTRUCTIONS:',
-            '- Return ONLY valid JSON. No prose or markdown.',
-            '- Use these top-level keys: profile, contact, social, skills, languages, experience, certificates, education, technologies.',
-            '- Ensure each experience entry includes a \"technologies\" array with relevant tools (strings).',
-            '- Keep achievements concise, metric-driven, and aligned with the role while staying truthful to the base profile.',
-            '- Preserve download paths unless replacements are explicitly provided.'
+            '=== TAILORING INSTRUCTIONS ===',
+            '',
+            '## PRIMARY OBJECTIVE',
+            'Transform this resume to maximize ATS score and recruiter appeal for the target role.',
+            'Focus on relevance, keyword optimization, and quantifiable impact.',
+            '',
+            '## OUTPUT FORMAT',
+            '- Return ONLY valid JSON matching the input structure',
+            '- NO markdown formatting, NO code blocks, NO explanatory text',
+            '- Use exact keys: profile, contact, social, skills, languages, experience, certificates, education, technologies, interests',
+            '- Preserve all array structures and object properties',
+            '',
+            '## ANALYSIS PHASE (Internal - Do Not Output)',
+            '1. Extract key requirements: required skills, preferred skills, years of experience, domain knowledge',
+            '2. Identify priority keywords: technologies, methodologies, certifications, business outcomes',
+            '3. Determine role focus: IC vs leadership, frontend vs backend, specific domain expertise',
+            '4. Note soft skills emphasized: collaboration, communication, ownership, etc.',
+            '',
+            '## SECTION-BY-SECTION TAILORING',
+            '',
+            '### PROFILE',
+            '- headline: Rewrite to match target role title/seniority (e.g., "Senior Backend Engineer" → job-specific)',
+            '- summary: 2-3 sentences maximum. Lead with role match, highlight top 3-4 relevant achievements with metrics',
+            '  * Use job posting language/terminology',
+            '  * Include 2-3 key technical skills from job description',
+            '  * Emphasize business impact (scalability, cost reduction, growth, etc.)',
+            '  * Example: "Backend Engineer with 5+ years building distributed systems. Reduced infrastructure costs 28% through optimization. Expert in Python, AWS, and event-driven architectures."',
+            '- Keep all other profile fields unchanged (name, contact, image, download paths)',
+            '',
+            '### SKILLS',
+            '- Reorder skills array to prioritize job-required technologies first',
+            '- Group related skills: languages together, frameworks together, cloud platforms together',
+            '- Add missing keywords that candidate likely has based on experience (be conservative)',
+            '- Remove or deprioritize skills not mentioned in job posting',
+            '- Limit to 30-40 most relevant skills',
+            '- Order: Required Tech → Frameworks → Cloud → Methodologies → Soft Skills',
+            '',
+            '### EXPERIENCE',
+            'For EACH experience entry:',
+            '',
+            '1. **title**: Adjust if needed to match industry standard titles',
+            '',
+            '2. **summary**: Rewrite in 1-2 sentences focusing on:',
+            '   - Core responsibility alignment with target role',
+            '   - Key technologies/methodologies used',
+            '   - Primary business impact or scope',
+            '',
+            '3. **highlights**: THIS IS CRITICAL - Rewrite 3-4 bullet points using XYZ formula:',
+            '   "Accomplished [X] by doing [Y] resulting in [Z]"',
+            '   ',
+            '   Rules for highlights:',
+            '   - Start with strong action verbs (Built, Architected, Reduced, Improved, Launched, Scaled, Optimized)',
+            '   - Include specific metrics/numbers whenever possible (%, $, time saved, users impacted)',
+            '   - Use job posting keywords naturally',
+            '   - Focus on relevant achievements for target role',
+            '   - Keep under 2 lines each',
+            '   - Be specific about technologies used',
+            '   ',
+            '   Good examples:',
+            '   ✓ "Built distributed event pipeline processing 2M+ events/day using AWS Lambda and Kinesis, reducing latency by 40%"',
+            '   ✓ "Architected microservices infrastructure on AWS ECS, supporting 10x traffic growth with 99.95% uptime"',
+            '   ✓ "Optimized database queries and implemented caching strategy, improving API response time from 850ms to 120ms"',
+            '   ',
+            '   Avoid weak examples:',
+            '   ✗ "Worked on backend systems"',
+            '   ✗ "Helped improve performance"',
+            '   ✗ "Responsible for API development"',
+            '',
+            '4. **technologies**: Array of 5-10 specific tech stack items used in this role',
+            '   - Prioritize technologies mentioned in job posting',
+            '   - Include: languages, frameworks, cloud platforms, databases, tools',
+            '   - Be specific: "React" not "Frontend", "PostgreSQL" not "SQL"',
+            '   - Extract from existing highlights or add based on role context',
+            '',
+            '5. **Relevance Scoring** (internal logic):',
+            '   - Most recent 2-3 roles: Expand details if relevant, show progression',
+            '   - Older/less relevant roles: Condense to 2 highlights max',
+            '   - If role has no relevance: Keep but minimize (1-2 highlights)',
+            '',
+            '### TECHNOLOGIES',
+            '- Reorder to prioritize job-required technologies first',
+            '- Keep only technologies relevant to target role (remove unrelated ones)',
+            '- Ensure icons URLs are preserved',
+            '- Add missing technologies that appear in experience section',
+            '- Limit to 10-12 most relevant technologies',
+            '',
+            '### CERTIFICATES',
+            '- Highlight certificates relevant to role (cloud certs, specific frameworks, etc.)',
+            '- Reorder by relevance if multiple certs exist',
+            '- Keep unchanged if not relevant to reordering',
+            '- Add Certificates that are relevant to the role',
+            '',
+            '### EDUCATION',
+            '- Keep as-is unless job specifically requires certain degree',
+            '- Can emphasize honors/achievements if relevant',
+            '',
+            '### LANGUAGES',
+            '- Keep as-is unless job specifically mentions language requirements',
+            '',
+            '### CONTACT & SOCIAL',
+            '- NEVER modify these sections',
+            '',
+            '### INTERESTS',
+            '- Keep as-is, can reorder if interests align with company culture',
+            '',
+            '## KEYWORD OPTIMIZATION STRATEGY',
+            '- Natural integration: Keywords must flow naturally in sentences',
+            '- Density: Aim for 2-3 mentions of critical keywords across resume',
+            '- Variations: Use synonyms (e.g., "Machine Learning" and "ML", "JavaScript" and "JS")',
+            '- Context: Always pair keywords with accomplishments',
+            '',
+            '## AUTHENTICITY RULES',
+            '- NEVER fabricate experience, companies, or dates',
+            '- Can reasonably infer related skills (e.g., if used React, likely knows JavaScript)',
+            '',
+            '## QUALITY CHECKLIST',
+            'Before returning JSON, verify:',
+            '☐ All required keywords from job posting appear naturally',
+            '☐ Experience highlights use action verbs + metrics',
+            '☐ Skills ordered by job relevance',
+            '☐ Summary is concise and keyword-rich',
+            '☐ Technologies array reflects actual experience',
+            '☐ Each highlight is specific and quantified',
+            '☐ JSON structure matches input exactly',
+            '',
+            '## CRITICAL REMINDERS',
+            '- Output ONLY the JSON object, nothing else',
+            '- Preserve all object structure and property names exactly',
+            '- Focus on relevance and measurable impact',
+            '- Use job posting terminology and phrasing',
+            '- Every claim must be supportable by base resume',
+            '- Metrics make highlights 3x more effective - use them liberally where they exist',
+            '',
+            'Now generate the tailored resume JSON:'
         ].join('\n');
     }
+
 
     function extractResponseText(payload) {
         if (!payload || typeof payload !== 'object') return '';
@@ -788,7 +920,7 @@
         const element = selectors.areaCv;
         const elementHeight = element.scrollHeight;
         const elementWidth = element.scrollWidth;
-        
+
         // Calculate dimensions in mm (A4 width is 210mm)
         const pageWidth = 210;
         const pageHeight = (elementHeight * pageWidth) / elementWidth;
