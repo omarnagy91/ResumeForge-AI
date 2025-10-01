@@ -65,8 +65,8 @@
                         </a>
                     </li>
                     <li class="nav_item">
-                        <a href="#interests" class="nav_link">
-                            <i class="fa-solid fa-icons nav_icon"></i>Interests
+                        <a href="#technologies" class="nav_link">
+                            <i class="fa-solid fa-code nav_icon"></i>Tech Stack
                         </a>
                     </li>
                 </ul>
@@ -129,16 +129,20 @@
                     <p class="profile_description" id="profile-summary"></p>
                 </section>
 
-                <section class="skills section" id="skills">
-                    <h2 class="section-title">Skills</h2>
-                    <div class="skills_container">
-                        <div class="skills_content bd-grid" data-collection="skills"></div>
-                    </div>
+                <!-- ATS-friendly skills section (hidden but readable by ATS) -->
+                <section class="ats-skills" id="skills" aria-hidden="true">
+                    <h2>Skills</h2>
+                    <div data-collection="skills"></div>
                 </section>
 
                 <section class="languages section" id="languages">
                     <h2 class="section-title">Languages</h2>
                     <div class="languages_container" data-collection="languages"></div>
+                </section>
+
+                <section class="technologies section" id="technologies">
+                    <h2 class="section-title">Technologies</h2>
+                    <div class="technologies_container" data-collection="technologies"></div>
                 </section>
             </div>
 
@@ -156,11 +160,6 @@
                 <section class="education section" id="education">
                     <h2 class="section-title">Education</h2>
                     <div class="education_container bd-grid" data-collection="education"></div>
-                </section>
-
-                <section class="interests section" id="interests">
-                    <h2 class="section-title">Interests</h2>
-                    <div class="interests_container bd-grid" data-collection="interests"></div>
                 </section>
             </div>
         </div>

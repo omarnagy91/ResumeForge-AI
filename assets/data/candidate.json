@@ -3,13 +3,13 @@
     "fullName": "Omar Nagy",
     "formattedName": "OMAR NAGY",
     "shortName": "Omar Nagy",
-    "headline": "Senior Frontend Engineer & AI Resume Specialist",
-    "location": "Cairo, Egypt (Remote)",
-    "email": "hello@omargnagy.com",
-    "phone": "",
-    "phoneLink": "",
+    "headline": "Distributed Systems & Backend Engineer",
+    "location": "Cairo, Egypt",
+    "email": "omargnagy91@gmail.com",
+    "phone": "+201556886883",
+    "phoneLink": "tel:+201556886883",
     "image": "assets/pictures/profile.png",
-    "summary": "Senior front-end engineer building accessible, data-driven hiring experiences with a focus on AI-assisted tooling and polished user interfaces.",
+    "summary": "Distributed Systems & Backend Engineer specializing in Python, FastAPI, AWS, event-driven architectures, and LLM/AI workflows. Delivered scalable cloud-native, AI/LLM-enabled products for fast-evolving startups. Proven in zero-to-one builds, automation, and business-impact delivery. Passionate collaborator, product-focused builder, open to high-responsibility engineering roles.",
     "download": {
       "light": "assets/pdf/myResumeCV-light.pdf",
       "dark": "assets/pdf/myResumeCV-dark.pdf"
@@ -18,12 +18,17 @@
   "contact": [
     {
       "icon": "fa-solid fa-location-dot",
-      "label": "Cairo, Egypt (Remote)"
+      "label": "Cairo, Egypt"
     },
     {
       "icon": "fa-solid fa-envelope",
-      "label": "hello@omargnagy.com",
-      "href": "mailto:hello@omargnagy.com"
+      "label": "omargnagy91@gmail.com",
+      "href": "mailto:omargnagy91@gmail.com"
+    },
+    {
+      "icon": "fa-solid fa-phone",
+      "label": "+20 155 688 6883",
+      "href": "tel:+201556886883"
     },
     {
       "icon": "fa-solid fa-globe",
@@ -34,61 +39,12 @@
   "social": [
     {
       "icon": "fa-brands fa-github",
-      "label": "@omarnagy91",
+      "label": "github.com/omarnagy91",
       "href": "https://github.com/omarnagy91"
-    },
-    {
-      "icon": "fa-solid fa-globe",
-      "label": "omargnagy.com",
-      "href": "https://omargnagy.com"
     }
   ],
   "skills": [
-    {
-      "name": "JavaScript",
-      "level": 90,
-      "keywords": [
-        "TypeScript",
-        "ES2023",
-        "Node.js"
-      ]
-    },
-    {
-      "name": "React",
-      "level": 88,
-      "keywords": [
-        "Hooks",
-        "Next.js",
-        "SSR"
-      ]
-    },
-    {
-      "name": "CSS",
-      "level": 92,
-      "keywords": [
-        "Design systems",
-        "CSS Grid",
-        "Animations"
-      ]
-    },
-    {
-      "name": "Testing",
-      "level": 80,
-      "keywords": [
-        "Playwright",
-        "Jest",
-        "Testing Library"
-      ]
-    },
-    {
-      "name": "AI Tooling",
-      "level": 75,
-      "keywords": [
-        "OpenAI APIs",
-        "Prompt design",
-        "AI governance"
-      ]
-    }
+    "Python", "FastAPI", "AWS", "Event-driven architectures", "TypeScript", "Node.js", "React.js", "LLM/AI Workflows", "WordPress", "JavaScript", "HTML5", "SQL", "PHP", "Cloud Infrastructure", "DevOps", "API Development", "OpenCV", "Cross-Platform Mobile Apps", "Svelte", "Firebase", "Serverless Framework", "A/B Testing", "Git", "Docker", "MongoDB", "PostgreSQL", "Data Visualization", "Pandas", "NumPy", "Cloud Computing", "Tableau", "Data Analysis", "MLOps", "Selenium", "Web Development", "Business Analytics", "Database Development", "User Experience Design", "Team Collaboration", "Product Strategy", "Client Management", "Professional Communication", "Growth Hacking", "Software Project Management", "Requirements Gathering", "Leadership", "Problem Solving", "Startup Management"
   ],
   "languages": [
     {
@@ -100,90 +56,208 @@
       "name": "English",
       "level": "Fluent",
       "rating": 5
-    },
-    {
-      "name": "German",
-      "level": "Conversational",
-      "rating": 3
     }
   ],
   "experience": [
     {
-      "title": "Founder & Maintainer",
-      "company": "ResumeForge AI (Open Source)",
-      "employmentType": "Independent",
-      "location": "Remote",
+      "title": "Co-Founder / Platform Engineer",
+      "company": "NeuraScale",
+      "employmentType": "Full-time",
+      "location": "Cairo, Egypt",
       "start": "Jan 2024",
-      "end": "Present",
-      "summary": "Designs and delivers ResumeForge AI, an open-source resume personalization platform used by job seekers and talent teams.",
+      "end": "Sep 2025",
+      "summary": "Co-founded and led platform engineering, building distributed event-data pipelines with TypeScript/Node and FastAPI on AWS, integrated LLM/AI for business reporting and workflows, launched scalable cloud infrastructure, and transitioned a high-growth startup.",
       "highlights": [
-        "Built a data-driven rendering engine that keeps UI, AI prompts, and PDF exports in sync.",
-        "Shipped GPT-5 tailoring with guardrails for ATS readability and JSON schema safety."
-      ]
+        "Built distributed event-data pipelines using TypeScript/Node.js and FastAPI on AWS",
+        "Integrated LLM/AI capabilities for business reporting and workflow automation",
+        "Designed and deployed scalable cloud-native infrastructure supporting rapid growth"
+      ],
+      "technologies": ["Python", "FastAPI", "TypeScript", "Node.js", "AWS", "LLM/AI", "Event-driven"]
     },
     {
-      "title": "Lead Frontend Engineer",
-      "company": "Product Studio Clients",
+      "title": "WordPress & Automation Engineer",
+      "company": "Alpine Laser",
+      "employmentType": "Contract",
+      "location": "United States (Remote)",
+      "start": "Jan 2024",
+      "end": "Apr 2024",
+      "summary": "Built a modular WordPress plugin and serverless scraper, enhancing LinkedIn post ingestion and marketing automation. Improved scraper reliability to 96% and implemented GitHub Actions CI, reducing release cycle time from days to one business day.",
+      "highlights": [
+        "Developed modular WordPress plugin with serverless scraper for LinkedIn automation",
+        "Improved scraper reliability from ~70% to 96% through robust error handling",
+        "Implemented GitHub Actions CI/CD, reducing release cycle from days to 1 business day"
+      ],
+      "technologies": ["WordPress", "PHP", "Serverless", "GitHub Actions", "Web Scraping"]
+    },
+    {
+      "title": "AI & Automation Consultant",
+      "company": "AccelAI",
       "employmentType": "Consulting",
       "location": "Remote",
-      "start": "May 2020",
+      "start": "Jan 2022",
       "end": "Dec 2023",
-      "summary": "Partnered with startups to ship conversion-focused web apps and design systems across SaaS and e-commerce products.",
+      "summary": "Delivered microservices for lead scoring and enrichment, reduced qualification time from 30m to 12m per batch, enforced cost guardrails for LLM, lowering inference spend 28%, and standardized prompt/eval harnesses for smoother internal iterations.",
       "highlights": [
-        "Optimized critical funnels with A/B-tested UI experiments that lifted activation by up to 22%.",
-        "Mentored cross-functional teams on accessibility-first workflows and automated testing."
-      ]
+        "Built microservices for lead scoring and enrichment, reducing qualification time by 60% (30m→12m)",
+        "Implemented LLM cost guardrails, reducing inference spend by 28%",
+        "Standardized prompt engineering and evaluation harnesses for faster iterations"
+      ],
+      "technologies": ["Python", "LLM/AI", "FastAPI", "Microservices", "Cost Optimization"]
+    },
+    {
+      "title": "Digital Transformation Lead",
+      "company": "Womonde",
+      "employmentType": "Full-time",
+      "location": "Hybrid",
+      "start": "Jan 2021",
+      "end": "Dec 2022",
+      "summary": "Re-engineered inventory and order sync, merged wholesale/e-commerce data, reclaimed ~10 staff hours/week, built QR-based loyalty MVP, and automated daily sales digest accelerating price adjustments from 48h to same day.",
+      "highlights": [
+        "Re-engineered inventory and order sync systems, saving ~10 staff hours/week",
+        "Built QR-based loyalty program MVP and automated daily sales reporting",
+        "Accelerated pricing adjustments from 48 hours to same-day through automation"
+      ],
+      "technologies": ["Python", "API Integration", "Automation", "Data Sync", "E-commerce"]
+    },
+    {
+      "title": "E-commerce Funnel Optimization Consultant",
+      "company": "Taager",
+      "employmentType": "Consulting",
+      "location": "Remote",
+      "start": "Jan 2021",
+      "end": "Dec 2021",
+      "summary": "Mentored 100+ marketplace sellers, raised conversion rates by 35%, produced A/B-testing playbooks, and delivered KPI scorecards bundled in Taager's Starter Growth Pack.",
+      "highlights": [
+        "Mentored 100+ marketplace sellers, increasing conversion rates by 35%",
+        "Developed A/B testing playbooks and KPI scorecards for growth optimization",
+        "Delivered growth methodologies bundled in Taager's Starter Growth Pack"
+      ],
+      "technologies": ["A/B Testing", "Analytics", "E-commerce", "Growth Hacking"]
+    },
+    {
+      "title": "Independent E-Commerce Engineering",
+      "company": "3 Niche Stores",
+      "employmentType": "Self-employed",
+      "location": "Egypt (Remote)",
+      "start": "Jan 2020",
+      "end": "Dec 2020",
+      "summary": "Optimized Shopify/WooCommerce stores, maintained 2.5–3.2x ROAS, automated margin and pricing tools, improved fulfillment SLA, and streamlined price update loop.",
+      "highlights": [
+        "Optimized Shopify/WooCommerce stores maintaining 2.5-3.2x ROAS",
+        "Built automated margin and pricing tools for inventory management",
+        "Improved fulfillment SLA and streamlined pricing update workflows"
+      ],
+      "technologies": ["Shopify", "WooCommerce", "JavaScript", "Automation", "E-commerce APIs"]
+    },
+    {
+      "title": "Co-Founder & Digital Strategist",
+      "company": "mBalloon",
+      "employmentType": "Co-Founder",
+      "location": "Alexandria, Egypt",
+      "start": "Jan 2019",
+      "end": "Jun 2020",
+      "summary": "Led integrated web and performance marketing projects for 15+ SMEs, delivered ~40% revenue growth, and established sprint-based processes now agency SOP.",
+      "highlights": [
+        "Led web development and performance marketing for 15+ SME clients",
+        "Delivered ~40% average revenue growth through integrated digital strategies",
+        "Established sprint-based processes that became agency standard operating procedures"
+      ],
+      "technologies": ["Web Development", "JavaScript", "Marketing Automation", "Project Management"]
+    },
+    {
+      "title": "Front-End Developer",
+      "company": "Doplen LLC.",
+      "employmentType": "Contract",
+      "location": "Remote",
+      "start": "Jan 2019",
+      "end": "Dec 2019",
+      "summary": "Migrated jQuery legacy views to React, improved regression bug rates, implemented code-splitting for performance, boosting TTI from 3.5s to 2.1s on mid-tier devices.",
+      "highlights": [
+        "Migrated legacy jQuery codebase to modern React architecture",
+        "Implemented code-splitting and lazy loading for performance optimization",
+        "Reduced Time to Interactive (TTI) from 3.5s to 2.1s on mid-tier devices"
+      ],
+      "technologies": ["React", "JavaScript", "jQuery", "Performance Optimization", "Webpack"]
+    },
+    {
+      "title": "Founder",
+      "company": "Librefit",
+      "employmentType": "Founder",
+      "location": "Alexandria, Egypt",
+      "start": "Jan 2017",
+      "end": "Dec 2018",
+      "summary": "Prototyped smartphone computer-vision measurement app using OpenCV and Xamarin, delivered ±1–2 cm variance, and honed rapid iteration and user feedback-driven development.",
+      "highlights": [
+        "Built computer-vision measurement app using OpenCV and Xamarin",
+        "Achieved ±1-2 cm measurement accuracy through CV algorithm optimization",
+        "Practiced rapid prototyping and user feedback-driven development cycles"
+      ],
+      "technologies": ["OpenCV", "Xamarin", "C#", "Computer Vision", "Mobile Development"]
     }
   ],
   "certificates": [
     {
-      "year": "2023",
-      "title": "Certified Web Accessibility Specialist",
-      "honours": ""
-    },
-    {
-      "year": "2021",
-      "title": "Google Cloud Professional Developer",
-      "honours": "with distinction"
-    },
-    {
-      "year": "2018",
-      "title": "AWS Solutions Architect Associate",
-      "honours": ""
+      "year": "2024",
+      "title": "Hands-on AI Masterclass I: Fundamentals",
+      "honours": "PAIR (you.com)"
     }
   ],
   "education": [
     {
-      "title": "B.Sc. Computer Engineering",
-      "institution": "Cairo University",
-      "years": "2011 - 2015"
-    },
-    {
-      "title": "Diploma in Product Design Leadership",
-      "institution": "Berlin Tech Institute",
-      "years": "2018 - 2019"
+      "title": "Bachelor's Degree, Computers and Informatics",
+      "institution": "Suez Canal University",
+      "years": "2014 - 2018",
+      "note": "Graduated First in Class"
     }
   ],
-  "interests": [
+  "technologies": [
     {
-      "icon": "fa-solid fa-code",
-      "label": "Open source"
+      "name": "Python",
+      "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg"
     },
     {
-      "icon": "fa-solid fa-robot",
-      "label": "AI ethics"
+      "name": "FastAPI",
+      "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/fastapi/fastapi-original.svg"
     },
     {
-      "icon": "fa-solid fa-book",
-      "label": "Product strategy"
+      "name": "AWS",
+      "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original-wordmark.svg"
     },
     {
-      "icon": "fa-solid fa-plane",
-      "label": "Travel"
+      "name": "TypeScript",
+      "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg"
     },
     {
-      "icon": "fa-solid fa-microphone",
-      "label": "Tech speaking"
+      "name": "Node.js",
+      "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg"
+    },
+    {
+      "name": "React",
+      "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg"
+    },
+    {
+      "name": "Docker",
+      "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg"
+    },
+    {
+      "name": "PostgreSQL",
+      "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg"
+    },
+    {
+      "name": "MongoDB",
+      "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg"
+    },
+    {
+      "name": "Git",
+      "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg"
+    },
+    {
+      "name": "WordPress",
+      "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/wordpress/wordpress-plain.svg"
+    },
+    {
+      "name": "Firebase",
+      "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg"
     }
   ]
 }

@@ -60,6 +60,7 @@
             social: document.querySelector('[data-collection="social"]'),
             skills: document.querySelector('[data-collection="skills"]'),
             languages: document.querySelector('[data-collection="languages"]'),
+            technologies: document.querySelector('[data-collection="technologies"]'),
             experience: document.querySelector('[data-collection="experience"]'),
             certificates: document.querySelector('[data-collection="certificates"]'),
             education: document.querySelector('[data-collection="education"]'),
@@ -223,6 +224,7 @@
         renderCollection(collections.social, data.social, renderSocialItem);
         renderCollection(collections.skills, data.skills, renderSkillItem);
         renderCollection(collections.languages, data.languages, renderLanguageItem);
+        renderCollection(collections.technologies, data.technologies, renderTechnologyItem);
         renderCollection(collections.experience, data.experience, renderExperienceItem);
         renderCollection(collections.certificates, data.certificates, renderCertificateItem);
         renderCollection(collections.education, data.education, renderEducationItem);
@@ -290,22 +292,28 @@
 
     function renderSkillItem(item) {
         if (!item) return null;
+        const data = typeof item === 'string' ? { name: item } : item || {};
         const wrapper = document.createElement('div');
         wrapper.className = 'skills_name';
 
         const title = document.createElement('span');
         title.className = 'skills_text';
-        title.textContent = item.name || '';
-        if (Array.isArray(item.keywords) && item.keywords.length) {
-            title.title = item.keywords.join(', ');
+        title.textContent = data.name || '';
+        if (Array.isArray(data.keywords) && data.keywords.length) {
+            title.title = data.keywords.join(', ');
         }
 
         const box = document.createElement('div');
         box.className = 'skills_box';
         const progress = document.createElement('span');
         progress.className = 'skills_progress';
-        const level = Math.max(0, Math.min(100, Number(item.level) || 0));
+        const rawLevel = Number(data.level ?? data.percent ?? data.score);
+        const hasLevel = Number.isFinite(rawLevel);
+        const level = hasLevel ? Math.max(0, Math.min(100, rawLevel)) : 100;
         progress.style.width = `${level}%`;
+        if (!hasLevel) {
+            progress.style.opacity = '0.35';
+        }
         box.appendChild(progress);
 
         wrapper.appendChild(title);
@@ -478,6 +486,33 @@
         return wrapper;
     }
 
+    function renderTechnologyItem(item) {
+        if (!item) return null;
+        const data = typeof item === 'string' ? { name: item } : item;
+        if (!data || (!data.name && !data.icon)) {
+            return null;
+        }
+
+        const wrapper = document.createElement('div');
+        wrapper.className = 'technologies_item';
+
+        if (data.icon) {
+            const icon = document.createElement('img');
+            icon.className = 'technologies_icon';
+            icon.src = data.icon;
+            icon.alt = `${data.name || 'Technology'} logo`;
+            icon.loading = 'lazy';
+            wrapper.appendChild(icon);
+        }
+
+        const label = document.createElement('span');
+        label.className = 'technologies_name';
+        label.textContent = data.name || '';
+        wrapper.appendChild(label);
+
+        return wrapper;
+    }
+
     function renderInterestItem(item) {
         if (!item) return null;
         const wrapper = document.createElement('div');
@@ -597,7 +632,7 @@
             input: buildTailorPrompt(jobDetails),
             reasoning: { effort: 'high' },
             text: { verbosity: 'medium' },
-            max_output_tokens: 8000
+            max_output_tokens: 12000
         };
 
         const response = await fetch(OPENAI_ENDPOINT, {
@@ -621,6 +656,17 @@
         }
 
         const data = await response.json();
+
+        if (data?.error) {
+            const message = data.error?.message || 'OpenAI API error.';
+            throw new Error(message);
+        }
+
+        if (data?.status === 'incomplete' || data?.incomplete_details) {
+            const reason = data?.incomplete_details?.reason || 'incomplete';
+            throw new Error(`OpenAI returned an incomplete response (${reason}). Try increasing max output tokens or trimming the job description.`);
+        }
+
         const content = extractResponseText(data);
         if (!content) {
             throw new Error('Empty response from GPT-5.');
@@ -637,12 +683,12 @@
             'Base resume JSON:',
             baseResume,
             '',
-            'Instructions:',
-            '- Respond with JSON following the same keys (profile, contact, social, skills, languages, experience, certificates, education, interests).',
-            '- Update achievements, skills, and summaries to align with the job while staying truthful to the base profile.',
-            '- Keep wording concise, ATS-friendly, and metric-driven where possible.',
-            '- Preserve download paths if you do not supply replacements.',
-            '- Do not add explanations or markdown around the JSON output.'
+            'CRITICAL INSTRUCTIONS:',
+            '- Return ONLY valid JSON. No prose or markdown.',
+            '- Use these top-level keys: profile, contact, social, skills, languages, experience, certificates, education, technologies.',
+            '- Ensure each experience entry includes a \"technologies\" array with relevant tools (strings).',
+            '- Keep achievements concise, metric-driven, and aligned with the role while staying truthful to the base profile.',
+            '- Preserve download paths unless replacements are explicitly provided.'
         ].join('\n');
     }
 
@@ -690,8 +736,10 @@
             throw new Error('Model response did not include a JSON object.');
         }
         const jsonString = jsonSource.slice(start, end + 1);
-        return JSON.parse(jsonString);
+        const sanitized = jsonString.replace(/[\u0000-\u0008\u000b\u000c\u000e-\u001f]/g, '');
+        return JSON.parse(sanitized);
     }
+
 
     function normalizeResume(tailored) {
         const base = deepClone(state.current || state.base || {});
@@ -700,7 +748,7 @@
         }
 
         const clone = deepClone(tailored);
-        const sections = ['profile', 'contact', 'social', 'skills', 'languages', 'experience', 'certificates', 'education', 'interests'];
+        const sections = ['profile', 'contact', 'social', 'skills', 'languages', 'technologies', 'experience', 'certificates', 'education', 'interests'];
 
         sections.forEach((key) => {
             const incoming = clone[key];

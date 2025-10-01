@@ -220,6 +220,46 @@ body.scale-cv {
     width: 115px;
 }
 
+.scale-cv .tech-chip {
+    padding: 0.15rem 0.4rem;
+    font-size: 0.65rem;
+    border-radius: 8px;
+}
+
+.scale-cv .experience_technologies {
+    gap: 0.25rem;
+    margin-top: 0.35rem;
+}
+
+.scale-cv .technologies_container {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.5rem;
+}
+
+.scale-cv .technologies_item {
+    padding: 0.3rem;
+}
+
+.scale-cv .technologies_icon {
+    width: 20px;
+    height: 20px;
+}
+
+.scale-cv .technologies_name {
+    font-size: 0.6rem;
+}
+
+/* Remove bottom padding/margin from last sections to eliminate white space in PDF */
+.scale-cv .resume_left > .section:last-child,
+.scale-cv .resume_right > .section:last-child {
+    padding-bottom: 0;
+}
+
+.scale-cv .resume {
+    padding-bottom: 0;
+    margin-bottom: 0;
+}
+
 /* Body */
 
 body {
@@ -788,6 +828,89 @@ body.dark-theme .button-outline:hover {
 }
 .experience_highlights li {
     margin-bottom: 0.35rem;
+}
+
+/* Technology chips for experience */
+.experience_technologies {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    margin-top: 0.5rem;
+}
+
+.tech-chip {
+    display: inline-block;
+    padding: 0.2rem 0.6rem;
+    background-color: var(--container-color-alt);
+    color: var(--text-color);
+    font-size: var(--smaller-font-size);
+    border-radius: 12px;
+    font-weight: var(--font-medium);
+    border: 1px solid var(--text-color-light);
+}
+
+body.dark-theme .tech-chip {
+    background-color: var(--container-color);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+/* ATS-friendly hidden skills section */
+.ats-skills {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+}
+
+/* Technologies section with logos */
+.technologies_container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.75rem;
+    margin-top: var(--margin-1);
+}
+
+.technologies_item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.5rem;
+    background-color: transparent;
+    border-radius: 0.35rem;
+    transition: transform 0.2s ease;
+}
+
+.technologies_item:hover {
+    transform: translateY(-2px);
+}
+
+.technologies_icon {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+    filter: grayscale(100%) opacity(0.7);
+    transition: filter 0.2s ease;
+}
+
+.technologies_item:hover .technologies_icon {
+    filter: grayscale(0%) opacity(1);
+}
+
+body.dark-theme .technologies_icon {
+    filter: grayscale(100%) brightness(1.5) opacity(0.8);
+}
+
+body.dark-theme .technologies_item:hover .technologies_icon {
+    filter: grayscale(0%) brightness(1) opacity(1);
+}
+
+.technologies_name {
+    font-size: var(--smaller-font-size);
+    color: var(--text-color);
+    font-weight: var(--font-medium);
+    text-align: center;
 }
 
 
