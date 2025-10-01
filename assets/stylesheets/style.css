@@ -36,6 +36,10 @@
     /* Z Index */
     --z-tooltip: 10;
     --z-fixed: 100;
+
+    --border-color-subtle: rgba(64, 58, 58, 0.2);
+    --shadow-elevated: 0 12px 32px rgba(10, 12, 18, 0.08);
+    --error-color: #d9534f;
 }
 
 /* Base */
@@ -74,6 +78,8 @@ body.dark-theme {
     --container-color: #212121;
     --container-color-alt: #181616;
     --body-color: #2B2B2B;
+    --border-color-subtle: rgba(255, 255, 255, 0.25);
+    --shadow-elevated: 0 12px 32px rgba(10, 12, 18, 0.35);
 }
 
 /* Generate PDF Button */
@@ -713,7 +719,7 @@ img {
     border-radius: 1.25rem;
     padding: var(--margin-3);
     margin-bottom: var(--margin-3);
-    box-shadow: 0 12px 32px rgba(10, 12, 18, 0.08);
+    box-shadow: var(--shadow-elevated);
 }
 body.dark-theme .customizer {
     background-color: var(--container-color-alt);
@@ -738,7 +744,7 @@ body.dark-theme .customizer {
 .customizer_field input,
 .customizer_field textarea {
     width: 100%;
-    border: 1px solid rgba(64, 58, 58, 0.2);
+    border: 1px solid var(--border-color-subtle);
     border-radius: 0.75rem;
     padding: 0.75rem 1rem;
     font-family: var(--body-font);
@@ -749,7 +755,6 @@ body.dark-theme .customizer {
 body.dark-theme .customizer_field input,
 body.dark-theme .customizer_field textarea {
     background-color: var(--container-color);
-    border-color: rgba(255, 255, 255, 0.25);
     color: var(--text-color);
 }
 .customizer_field textarea {
@@ -813,7 +818,7 @@ body.dark-theme .button-outline:hover {
     font-size: var(--small-font-size);
 }
 .customizer_status--error {
-    color: #d9534f;
+    color: var(--error-color);
 }
 @media print {
     .customizer {

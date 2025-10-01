@@ -44,7 +44,54 @@
     }
   ],
   "skills": [
-    "Python", "FastAPI", "AWS", "Event-driven architectures", "TypeScript", "Node.js", "React.js", "LLM/AI Workflows", "WordPress", "JavaScript", "HTML5", "SQL", "PHP", "Cloud Infrastructure", "DevOps", "API Development", "OpenCV", "Cross-Platform Mobile Apps", "Svelte", "Firebase", "Serverless Framework", "A/B Testing", "Git", "Docker", "MongoDB", "PostgreSQL", "Data Visualization", "Pandas", "NumPy", "Cloud Computing", "Tableau", "Data Analysis", "MLOps", "Selenium", "Web Development", "Business Analytics", "Database Development", "User Experience Design", "Team Collaboration", "Product Strategy", "Client Management", "Professional Communication", "Growth Hacking", "Software Project Management", "Requirements Gathering", "Leadership", "Problem Solving", "Startup Management"
+    "Python",
+    "FastAPI",
+    "AWS",
+    "Event-driven architectures",
+    "TypeScript",
+    "Node.js",
+    "React.js",
+    "LLM/AI Workflows",
+    "WordPress",
+    "JavaScript",
+    "HTML5",
+    "SQL",
+    "PHP",
+    "Cloud Infrastructure",
+    "DevOps",
+    "API Development",
+    "OpenCV",
+    "Cross-Platform Mobile Apps",
+    "Svelte",
+    "Firebase",
+    "Serverless Framework",
+    "A/B Testing",
+    "Git",
+    "Docker",
+    "MongoDB",
+    "PostgreSQL",
+    "Data Visualization",
+    "Pandas",
+    "NumPy",
+    "Cloud Computing",
+    "Tableau",
+    "Data Analysis",
+    "MLOps",
+    "Selenium",
+    "Web Development",
+    "Business Analytics",
+    "Database Development",
+    "User Experience Design",
+    "Team Collaboration",
+    "Product Strategy",
+    "Client Management",
+    "Professional Communication",
+    "Growth Hacking",
+    "Software Project Management",
+    "Requirements Gathering",
+    "Leadership",
+    "Problem Solving",
+    "Startup Management"
   ],
   "languages": [
     {
@@ -72,7 +119,15 @@
         "Integrated LLM/AI capabilities for business reporting and workflow automation",
         "Designed and deployed scalable cloud-native infrastructure supporting rapid growth"
       ],
-      "technologies": ["Python", "FastAPI", "TypeScript", "Node.js", "AWS", "LLM/AI", "Event-driven"]
+      "technologies": [
+        "Python",
+        "FastAPI",
+        "TypeScript",
+        "Node.js",
+        "AWS",
+        "LLM/AI",
+        "Event-driven"
+      ]
     },
     {
       "title": "WordPress & Automation Engineer",
@@ -87,7 +142,13 @@
         "Improved scraper reliability from ~70% to 96% through robust error handling",
         "Implemented GitHub Actions CI/CD, reducing release cycle from days to 1 business day"
       ],
-      "technologies": ["WordPress", "PHP", "Serverless", "GitHub Actions", "Web Scraping"]
+      "technologies": [
+        "WordPress",
+        "PHP",
+        "Serverless",
+        "GitHub Actions",
+        "Web Scraping"
+      ]
     },
     {
       "title": "AI & Automation Consultant",
@@ -98,11 +159,17 @@
       "end": "Dec 2023",
       "summary": "Delivered microservices for lead scoring and enrichment, reduced qualification time from 30m to 12m per batch, enforced cost guardrails for LLM, lowering inference spend 28%, and standardized prompt/eval harnesses for smoother internal iterations.",
       "highlights": [
-        "Built microservices for lead scoring and enrichment, reducing qualification time by 60% (30m→12m)",
+        "Built microservices for lead scoring and enrichment, reducing qualification time by 60% (30m->12m)",
         "Implemented LLM cost guardrails, reducing inference spend by 28%",
         "Standardized prompt engineering and evaluation harnesses for faster iterations"
       ],
-      "technologies": ["Python", "LLM/AI", "FastAPI", "Microservices", "Cost Optimization"]
+      "technologies": [
+        "Python",
+        "LLM/AI",
+        "FastAPI",
+        "Microservices",
+        "Cost Optimization"
+      ]
     },
     {
       "title": "Digital Transformation Lead",
@@ -117,7 +184,13 @@
         "Built QR-based loyalty program MVP and automated daily sales reporting",
         "Accelerated pricing adjustments from 48 hours to same-day through automation"
       ],
-      "technologies": ["Python", "API Integration", "Automation", "Data Sync", "E-commerce"]
+      "technologies": [
+        "Python",
+        "API Integration",
+        "Automation",
+        "Data Sync",
+        "E-commerce"
+      ]
     },
     {
       "title": "E-commerce Funnel Optimization Consultant",
@@ -132,7 +205,12 @@
         "Developed A/B testing playbooks and KPI scorecards for growth optimization",
         "Delivered growth methodologies bundled in Taager's Starter Growth Pack"
       ],
-      "technologies": ["A/B Testing", "Analytics", "E-commerce", "Growth Hacking"]
+      "technologies": [
+        "A/B Testing",
+        "Analytics",
+        "E-commerce",
+        "Growth Hacking"
+      ]
     },
     {
       "title": "Independent E-Commerce Engineering",
@@ -141,13 +219,19 @@
       "location": "Egypt (Remote)",
       "start": "Jan 2020",
       "end": "Dec 2020",
-      "summary": "Optimized Shopify/WooCommerce stores, maintained 2.5–3.2x ROAS, automated margin and pricing tools, improved fulfillment SLA, and streamlined price update loop.",
+      "summary": "Optimized Shopify/WooCommerce stores, maintained 2.5-3.2x ROAS, automated margin and pricing tools, improved fulfillment SLA, and streamlined price update loop.",
       "highlights": [
         "Optimized Shopify/WooCommerce stores maintaining 2.5-3.2x ROAS",
         "Built automated margin and pricing tools for inventory management",
         "Improved fulfillment SLA and streamlined pricing update workflows"
       ],
-      "technologies": ["Shopify", "WooCommerce", "JavaScript", "Automation", "E-commerce APIs"]
+      "technologies": [
+        "Shopify",
+        "WooCommerce",
+        "JavaScript",
+        "Automation",
+        "E-commerce APIs"
+      ]
     },
     {
       "title": "Co-Founder & Digital Strategist",
@@ -162,7 +246,12 @@
         "Delivered ~40% average revenue growth through integrated digital strategies",
         "Established sprint-based processes that became agency standard operating procedures"
       ],
-      "technologies": ["Web Development", "JavaScript", "Marketing Automation", "Project Management"]
+      "technologies": [
+        "Web Development",
+        "JavaScript",
+        "Marketing Automation",
+        "Project Management"
+      ]
     },
     {
       "title": "Front-End Developer",
@@ -177,7 +266,13 @@
         "Implemented code-splitting and lazy loading for performance optimization",
         "Reduced Time to Interactive (TTI) from 3.5s to 2.1s on mid-tier devices"
       ],
-      "technologies": ["React", "JavaScript", "jQuery", "Performance Optimization", "Webpack"]
+      "technologies": [
+        "React",
+        "JavaScript",
+        "jQuery",
+        "Performance Optimization",
+        "Webpack"
+      ]
     },
     {
       "title": "Founder",
@@ -186,13 +281,19 @@
       "location": "Alexandria, Egypt",
       "start": "Jan 2017",
       "end": "Dec 2018",
-      "summary": "Prototyped smartphone computer-vision measurement app using OpenCV and Xamarin, delivered ±1–2 cm variance, and honed rapid iteration and user feedback-driven development.",
+      "summary": "Prototyped smartphone computer-vision measurement app using OpenCV and Xamarin, delivered +/-1-2 cm variance, and honed rapid iteration and user feedback-driven development.",
       "highlights": [
         "Built computer-vision measurement app using OpenCV and Xamarin",
-        "Achieved ±1-2 cm measurement accuracy through CV algorithm optimization",
+        "Achieved +/-1-2 cm measurement accuracy through CV algorithm optimization",
         "Practiced rapid prototyping and user feedback-driven development cycles"
       ],
-      "technologies": ["OpenCV", "Xamarin", "C#", "Computer Vision", "Mobile Development"]
+      "technologies": [
+        "OpenCV",
+        "Xamarin",
+        "C#",
+        "Computer Vision",
+        "Mobile Development"
+      ]
     }
   ],
   "certificates": [
