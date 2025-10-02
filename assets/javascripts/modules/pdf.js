@@ -51,6 +51,7 @@ function generateResume(area, isDarkMode, config) {
     const rect = area.getBoundingClientRect();
     const measuredWidth = Math.ceil(Math.max(rect.width, area.scrollWidth, area.offsetWidth, 1));
     const measuredHeight = Math.ceil(Math.max(rect.height, area.scrollHeight, area.offsetHeight, 1));
+
     const pageWidth = 210;
     const ratio = measuredHeight / measuredWidth;
     const pageHeight = ratio > 0 ? Math.max(pageWidth * ratio, 297) : 297;
@@ -58,34 +59,47 @@ function generateResume(area, isDarkMode, config) {
     const windowWidth = Math.max(document.documentElement.clientWidth, measuredWidth);
     const windowHeight = Math.max(document.documentElement.clientHeight, measuredHeight);
 
+    const renderScale = Math.min(2, Math.max(1.5, window.devicePixelRatio || 1));
+    const imageQuality = 0.82;
+
     const options = {
         margin: 0,
         filename,
-        image: { type: 'jpeg', quality: 0.98 },
+        image: { type: 'jpeg', quality: imageQuality },
         html2canvas: {
-            scale: 4,
+            scale: renderScale,
             useCORS: true,
             allowTaint: false,
+            backgroundColor: '#ffffff',
             width: measuredWidth,
             height: measuredHeight,
             windowWidth,
             windowHeight,
             logging: false
         },
-        jsPDF: { unit: 'mm', format: [pageWidth, pageHeight], orientation: 'portrait' },
+        jsPDF: {
+            unit: 'mm',
+            format: [pageWidth, pageHeight],
+            orientation: 'portrait',
+            compress: true,
+            putOnlyUsedFonts: true
+        },
         pagebreak: { mode: ['css', 'legacy'] }
     };
 
-    // With Font Awesome icons, we don't need any image conversion! Just generate the PDF directly.
-    console.log('📄 Generating PDF with Font Awesome icons...');
-    return html2pdf().set(options).from(area).save()
-        .then(() => {
-            console.log('✅ PDF generated successfully!');
-        })
-        .catch((error) => {
-            console.error('❌ PDF generation failed:', error);
-            throw error;
-        });
+    return waitForInlineImages(area).then(() => html2pdf().set(options).from(area).save());
+}
+
+function waitForInlineImages(root) {
+    const pending = Array.from(root.querySelectorAll('img[data-inline-pending="true"]'))
+        .map((image) => image.__inlinePromise)
+        .filter((promise) => promise && typeof promise.then === 'function');
+
+    if (!pending.length) {
+        return Promise.resolve();
+    }
+
+    return Promise.allSettled(pending).then(() => undefined);
 }
 
 function addScaleCv() {
