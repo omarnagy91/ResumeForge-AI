@@ -756,6 +756,54 @@ body.dark-theme .customizer_field textarea {
     background-color: var(--container-color);
     color: var(--text-color);
 }
+
+.button-small {
+    padding: 0.35rem 0.85rem;
+    font-size: var(--smaller-font-size);
+}
+.customizer_result {
+    display: none;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-top: var(--margin-2);
+    padding: 1rem 1.25rem;
+    border: 1px solid var(--border-color-subtle);
+    border-radius: 0.75rem;
+    background-color: var(--body-color);
+    box-shadow: var(--shadow-elevated);
+}
+.customizer_result:not([hidden]) {
+    display: flex;
+}
+.customizer_result-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+.customizer_result-header h3 {
+    margin: 0;
+    font-size: var(--h3-font-size);
+    color: var(--title-color);
+}
+.customizer_result-body {
+    max-height: 320px;
+    overflow-y: auto;
+    padding: 1rem;
+    line-height: 1.6;
+    font-size: var(--normal-font-size);
+    background-color: var(--container-color);
+    border-radius: 0.5rem;
+    border: 1px dashed var(--border-color-subtle);
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+body.dark-theme .customizer_result {
+    background-color: var(--container-color);
+}
+body.dark-theme .customizer_result-body {
+    background-color: var(--container-color-alt);
+}
 .customizer_field textarea {
     resize: vertical;
     min-height: 180px;

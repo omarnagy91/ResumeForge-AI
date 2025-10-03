@@ -14,9 +14,14 @@ export function createDomHandles() {
         themeButton: document.getElementById('theme-button'),
         apiKeyInput: document.getElementById('api-key-input'),
         jobInput: document.getElementById('job-details-input'),
+        extraInstructions: document.getElementById('extra-instructions-input'),
         customizeButton: document.getElementById('customize-button'),
+        coverLetterButton: document.getElementById('cover-letter-button'),
         resetButton: document.getElementById('reset-button'),
-        status: document.getElementById('customizer-status')
+        status: document.getElementById('customizer-status'),
+        coverLetterContainer: document.getElementById('cover-letter-container'),
+        coverLetterOutput: document.getElementById('cover-letter-output'),
+        coverLetterCopyButton: document.getElementById('copy-cover-letter')
     };
 
     const collections = {

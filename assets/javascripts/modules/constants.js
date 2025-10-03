@@ -11,6 +11,7 @@ export const SCROLL_TOP_THRESHOLD = 200;
 export const STORAGE_KEYS = Object.freeze({
     apiKey: 'resumeforge-ai:openai-api-key',
     jobNotes: 'resumeforge-ai:job-details',
+    extraInstructions: 'resumeforge-ai:extra-instructions',
     darkMode: 'resumeforge-ai:dark-mode'
 });
 

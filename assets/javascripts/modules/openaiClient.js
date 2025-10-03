@@ -107,3 +107,52 @@ export function extractJson(content) {
     const sanitized = jsonString.replace(/[\u0000-\u0008\u000b\u000c\u000e-\u001f]/g, '');
     return JSON.parse(sanitized);
 }
+
+export async function requestCoverLetter(apiKey, prompt) {
+    const payload = {
+        model: OPENAI_MODEL,
+        input: prompt,
+        reasoning: { effort: 'medium' },
+        text: { verbosity: 'high' },
+        max_output_tokens: Math.min(MAX_OUTPUT_TOKENS, 2400)
+    };
+
+    const response = await fetch(OPENAI_ENDPOINT, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${apiKey}`
+        },
+        body: JSON.stringify(payload)
+    });
+
+    if (!response.ok) {
+        let message = `OpenAI request failed (${response.status})`;
+        try {
+            const errorPayload = await response.json();
+            message = errorPayload?.error?.message || message;
+        } catch (error) {
+            // Ignore JSON parse errors when extracting error message.
+        }
+        throw new Error(message);
+    }
+
+    const data = await response.json();
+
+    if (data?.error) {
+        const message = data.error?.message || 'OpenAI API error.';
+        throw new Error(message);
+    }
+
+    if (data?.status === 'incomplete' || data?.incomplete_details) {
+        const reason = data?.incomplete_details?.reason || 'incomplete';
+        throw new Error(`OpenAI returned an incomplete response (${reason}). Try trimming the job description.`);
+    }
+
+    const content = extractResponseText(data);
+    if (!content) {
+        throw new Error('Empty response from GPT-5.');
+    }
+
+    return content.trim();
+}

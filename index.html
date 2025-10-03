@@ -92,11 +92,23 @@
                     <label for="job-details-input">Job Description or Recruiter Notes</label>
                     <textarea id="job-details-input" rows="8" placeholder="Paste the job description, company notes, or recruiter instructions here."></textarea>
                 </div>
+                <div class="customizer_field">
+                    <label for="extra-instructions-input">Additional Guidance (optional)</label>
+                    <textarea id="extra-instructions-input" rows="3" placeholder="Add extra points for the AI to include."></textarea>
+                </div>
                 <div class="customizer_actions">
                     <button type="button" id="customize-button" class="button-primary">Generate Tailored Resume</button>
+                    <button type="button" id="cover-letter-button" class="button-outline">Generate Cover Letter</button>
                     <button type="button" id="reset-button" class="button-outline">Reset to Base Profile</button>
                 </div>
                 <p class="customizer_status" id="customizer-status" aria-live="polite"></p>
+                <div class="customizer_result" id="cover-letter-container" hidden>
+                    <div class="customizer_result-header">
+                        <h3>Cover Letter</h3>
+                        <button type="button" id="copy-cover-letter" class="button-outline button-small" aria-label="Copy cover letter to clipboard" disabled>Copy</button>
+                    </div>
+                    <pre class="customizer_result-body" id="cover-letter-output"></pre>
+                </div>
             </div>
         </section>
 
